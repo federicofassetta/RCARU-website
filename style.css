@@ -1,0 +1,38 @@
+/* =========================
+   RCARU Website
+   Main stylesheet
+   ========================= */
+
+/* Basic reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* General page styling */
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #222;
+    background-color: #ffffff;
+}
+
+
+/* Main heading */
+
+h1 {
+    font-size: 3rem;
+    color: #1f3a5f;
+}
+
+
+/* Paragraphs */
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
