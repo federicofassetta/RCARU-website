@@ -76,3 +76,10 @@ nav {
 .nav-links a:hover {
     color: #1f3a5f;
 }
+/* RCARU logo */
+
+.logo img {
+    height: 52px;
+    width: auto;
+    display: block;
+}
