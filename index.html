@@ -1,43 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es" data-lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>RCARU</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RCARU · Red de Científicos Argentinos en el Reino Unido</title>
+  <meta name="description" content="Red de científicos, investigadores y académicos argentinos en el Reino Unido. Vinculamos instituciones británicas y argentinas.">
+  <meta property="og:title" content="RCARU · Red de Científicos Argentinos en el Reino Unido">
+  <meta property="og:description" content="Científicos, investigadores y académicos argentinos en el Reino Unido, conectados.">
+  <meta property="og:image" content="img/og-card.jpg">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <a class="skip" href="#main">
+    <span lang="es">Saltar al contenido</span><span lang="en">Skip to content</span>
+  </a>
 
-    <header>
-        <nav>
-            <a href="index.html" class="logo">
-    <img src="RCARU_logo.png" alt="RCARU logo">
-</a>
+  <header class="site-header">
+    <nav class="nav wrap" aria-label="Principal">
+      <a href="#inicio" class="nav-logo">
+        <img src="img/mark-white.png" alt="" width="351" height="557">
+        <span class="nav-wordmark">RCARU</span>
+      </a>
 
-            <div class="nav-links">
-                <a href="#">About</a>
-                <a href="#">Network</a>
-                <a href="#">Events</a>
-                <a href="#">Opportunities</a>
-                <a href="#">News</a>
-                <a href="#">Join</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">
+        <span lang="es">Menú</span><span lang="en">Menu</span>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#mision"><span lang="es">Misión</span><span lang="en">Mission</span></a></li>
+        <li><a href="#becas"><span lang="es">Becas</span><span lang="en">Funding</span></a></li>
+        <li><a href="#equipo"><span lang="es">Equipo</span><span lang="en">Team</span></a></li>
+        <li><a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a></li>
+        <li class="lang-switch" role="group" aria-label="Idioma / Language">
+          <button type="button" data-set-lang="es" aria-pressed="true">ES</button>
+          <button type="button" data-set-lang="en" aria-pressed="false">EN</button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- Hero -->
+    <section class="hero" id="inicio">
+      <img class="hero-mark" src="img/mark-white.png" alt="" aria-hidden="true">
+      <div class="wrap hero-inner">
+        <h1>
+          <span lang="es">Científicos argentinos en el Reino Unido, en red.</span>
+          <span lang="en">Argentine scientists in the UK, connected.</span>
+        </h1>
+        <p class="hero-lead">
+          <span lang="es">Somos investigadores, científicos y académicos argentinos que viven y trabajan en el Reino Unido. Nos conocemos, compartimos oportunidades y tendemos puentes entre instituciones británicas y argentinas.</span>
+          <span lang="en">We are Argentine researchers, scientists and academics living and working in the UK. We get to know each other, share opportunities and build bridges between British and Argentine institutions.</span>
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-sun" href="https://docs.google.com/forms/d/e/1FAIpQLScm18pNzECMZEFP5jRRceDAkdsjUvaOY8f1EcbW2y8bjrRIww/viewform?usp=dialog" target="_blank" rel="noopener">
+            <span lang="es">Sumate a la red</span><span lang="en">Join the network</span>
+          </a>
+          <a class="btn btn-ghost" href="#becas">
+            <span lang="es">Ver becas y financiamiento</span><span lang="en">Browse funding</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="section mission" id="mision">
+      <div class="wrap mission-grid">
+        <div class="mission-intro">
+          <h2><span lang="es">Qué hacemos</span><span lang="en">What we do</span></h2>
+          <p>
+            <span lang="es">La red nació para que nadie llegue solo. Hoy reúne a personas de la biología, la física, la ingeniería, la agronomía, la salud y las ciencias exactas, en universidades, institutos y empresas de todo el país.</span>
+            <span lang="en">The network exists so nobody arrives alone. It brings together people in biology, physics, engineering, agronomy, health and the exact sciences, across universities, institutes and companies throughout the UK.</span>
+          </p>
+          <a class="text-link" href="https://drive.google.com/file/d/1AIaegDYoMBN-pSRaz3JfjDPcvD-eN6qx/view?usp=sharing" target="_blank" rel="noopener">
+            <span lang="es">Leer nuestro estatuto</span><span lang="en">Read our statute (Spanish)</span>
+          </a>
+        </div>
+
+        <ul class="mission-list">
+          <li>
+            <h3><span lang="es">Comunidad</span><span lang="en">Community</span></h3>
+            <p><span lang="es">Fortalecemos los vínculos entre los científicos argentinos residentes en el Reino Unido.</span><span lang="en">We strengthen ties between Argentine scientists living in the UK.</span></p>
+          </li>
+          <li>
+            <h3><span lang="es">Cooperación internacional</span><span lang="en">International cooperation</span></h3>
+            <p><span lang="es">Promovemos proyectos de cooperación entre grupos e instituciones de ambos países.</span><span lang="en">We promote joint projects between groups and institutions in both countries.</span></p>
+          </li>
+          <li>
+            <h3><span lang="es">Ciencia y tecnología bilateral</span><span lang="en">Bilateral science and technology</span></h3>
+            <p><span lang="es">Colaboramos en iniciativas científico-tecnológicas bilaterales y multilaterales.</span><span lang="en">We take part in bilateral and multilateral science and technology initiatives.</span></p>
+          </li>
+          <li>
+            <h3><span lang="es">Oportunidades</span><span lang="en">Opportunities</span></h3>
+            <p><span lang="es">Difundimos becas, programas de cooperación, puestos de trabajo y posiciones de posgrado.</span><span lang="en">We share fellowships, cooperation programmes, jobs and postgraduate positions.</span></p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Funding -->
+    <section class="section becas" id="becas">
+      <div class="wrap becas-inner">
+        <div>
+          <h2><span lang="es">Becas y financiamiento</span><span lang="en">Fellowships and funding</span></h2>
+          <p>
+            <span lang="es">Mantenemos una base de datos abierta con becas, subsidios y convocatorias para investigar en el Reino Unido y en Argentina. La actualizamos periódicamente.</span>
+            <span lang="en">We keep an open database of fellowships, grants and calls for research in the UK and Argentina, updated regularly.</span>
+          </p>
+        </div>
+        <a class="btn btn-navy" href="https://docs.google.com/spreadsheets/d/1djUr2eCCwPmGwWFn-BecRJmCKX9TzbRU/edit?usp=sharing&amp;ouid=114209241532557156297&amp;rtpof=true&amp;sd=true" target="_blank" rel="noopener">
+          <span lang="es">Abrir la base de becas</span><span lang="en">Open the funding database</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Team -->
+    <section class="section team" id="equipo">
+      <div class="wrap">
+        <div class="section-head">
+          <h2><span lang="es">Coordinación</span><span lang="en">Coordinators</span></h2>
+          <p>
+            <span lang="es">Un equipo voluntario de coordinadores por área. Escribinos por LinkedIn.</span>
+            <span lang="en">A volunteer team of coordinators by field. Reach us on LinkedIn.</span>
+          </p>
+        </div>
+
+        <ul class="team-grid">
+          <li class="person">
+            <a href="https://www.linkedin.com/in/ricardo-morilla-8a587657/" target="_blank" rel="noopener">
+              <span class="avatar" data-initials="RM"><img src="img/team/ricardo-morilla.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Ricardo Morilla</span>
+              <span class="person-role"><span lang="es">Coordinador científico</span><span lang="en">Scientific coordinator</span></span>
+            </a>
+          </li>
+          <li class="person">
+            <a href="https://www.linkedin.com/in/matiasacosta/" target="_blank" rel="noopener">
+              <span class="avatar" data-initials="MA"><img src="img/team/matias-acosta.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Matías Acosta</span>
+              <span class="person-role"><span lang="es">Coordinador de innovación</span><span lang="en">Innovation coordinator</span></span>
+            </a>
+          </li>
+          <li class="person">
+            <a href="https://www.linkedin.com/in/exequiel-porta/" target="_blank" rel="noopener">
+              <span class="avatar" data-initials="EP"><img src="img/team/exequiel-porta.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Exequiel Porta</span>
+              <span class="person-role"><span lang="es">Coordinador de salud y biología</span><span lang="en">Health and biology coordinator</span></span>
+            </a>
+          </li>
+          <li class="person">
+            <a href="https://www.linkedin.com/in/marianaafazio/" target="_blank" rel="noopener">
+              <span class="avatar" data-initials="MF"><img src="img/team/mariana-fazio.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Mariana Andrea Fazio</span>
+              <span class="person-role"><span lang="es">Coordinadora de ciencias exactas</span><span lang="en">Exact sciences coordinator</span></span>
+            </a>
+          </li>
+          <li class="person">
+            <a href="https://www.linkedin.com/in/pablo-poggi-820a361a9/" target="_blank" rel="noopener">
+              <span class="avatar" data-initials="PP"><img src="img/team/pablo-poggi.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Pablo Poggi</span>
+              <span class="person-role"><span lang="es">Coordinador de ciencias exactas</span><span lang="en">Exact sciences coordinator</span></span>
+            </a>
+          </li>
+          <li class="person">
+            <a href="https://uk.linkedin.com/in/gaston-caspe-26400240/en" target="_blank" rel="noopener">
+              <span class="avatar" data-initials="GC"><img src="img/team/gaston-caspe.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Gastón Caspe</span>
+              <span class="person-role"><span lang="es">Coordinador de agronomía</span><span lang="en">Agronomy coordinator</span></span>
+            </a>
+          </li>
+          <li class="person">
+            <a href="https://www.linkedin.com/in/federico-fassetta-a28779144/" target="_blank" rel="noopener">
+              <span class="avatar" data-initials="FF"><img src="img/team/federico-fassetta.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Federico Fassetta</span>
+              <span class="person-role"><span lang="es">Coordinador técnico</span><span lang="en">Technical coordinator</span></span>
+            </a>
+          </li>
+          <li class="person">
+            <a href="https://www.linkedin.com/in/nicofeldman/" target="_blank" rel="noopener">
+              <span class="avatar" data-initials="NF"><img src="img/team/nicolas-feldman.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Nicolás Feldman</span>
+              <span class="person-role"><span lang="es">Coordinador técnico</span><span lang="en">Technical coordinator</span></span>
+            </a>
+          </li>
+          <li class="person">
+            <div class="person-static">
+              <span class="avatar" data-initials="JC"><img src="img/team/judith-cherni.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Judith Cherni</span>
+              <span class="person-role"><span lang="es">Coordinadora técnica</span><span lang="en">Technical coordinator</span></span>
             </div>
-        </nav>
-    </header>
+          </li>
+          <li class="person">
+            <div class="person-static">
+              <span class="avatar" data-initials="IG"><img src="img/team/isro-gloger.jpg" alt="" loading="lazy"></span>
+              <span class="person-name">Isro Gloger</span>
+              <span class="person-role"><span lang="es">Coordinador emérito</span><span lang="en">Emeritus coordinator</span></span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
 
-    <main>
+    <!-- Contact / join -->
+    <section class="section contact" id="contacto">
+      <div class="wrap">
+        <h2><span lang="es">Sumate o escribinos</span><span lang="en">Join or get in touch</span></h2>
+        <div class="contact-grid">
+          <div class="contact-item contact-main">
+            <h3><span lang="es">¿Acabás de llegar o ya vivís en el Reino Unido?</span><span lang="en">Just arrived, or already living in the UK?</span></h3>
+            <p>
+              <span lang="es">Si sos investigador, científico, académico o profesional argentino, completá el formulario. Te sumamos a la lista de miembros y te avisamos de las próximas reuniones y boletines.</span>
+              <span lang="en">If you are an Argentine researcher, scientist, academic or professional, fill in the form. We'll add you to the members' list and let you know about upcoming meetings and newsletters.</span>
+            </p>
+            <a class="btn btn-sun" href="https://docs.google.com/forms/d/e/1FAIpQLScm18pNzECMZEFP5jRRceDAkdsjUvaOY8f1EcbW2y8bjrRIww/viewform?usp=dialog" target="_blank" rel="noopener">
+              <span lang="es">Completar el formulario</span><span lang="en">Fill in the form</span>
+            </a>
+          </div>
+          <div class="contact-item">
+            <h3>LinkedIn</h3>
+            <p><span lang="es">Novedades, eventos y convocatorias.</span><span lang="en">News, events and calls.</span></p>
+            <a class="text-link" href="https://www.linkedin.com/company/rcaru-uk" target="_blank" rel="noopener">
+              <span lang="es">Seguir a RCARU</span><span lang="en">Follow RCARU</span>
+            </a>
+          </div>
+          <div class="contact-item">
+            <h3>Email</h3>
+            <p><span lang="es">Para instituciones, propuestas o consultas.</span><span lang="en">For institutions, proposals or questions.</span></p>
+            <a class="text-link" href="mailto:redcaenru@gmail.com">redcaenru@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <h1>RCARU</h1>
+  </main>
 
-        <p>Red de Científicos Argentinos en el Reino Unido</p>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <img src="img/mark-white.png" alt="" aria-hidden="true" class="footer-mark">
+      <p>
+        <span lang="es">Red de Científicos Argentinos en el Reino Unido</span>
+        <span lang="en">Network of Argentine Scientists in the United Kingdom</span>
+      </p>
+      <p class="footer-small">© <span id="year">2026</span> RCARU</p>
+    </div>
+  </footer>
 
-        <p>Welcome to the RCARU website.</p>
-
-    </main>
-
+  <script src="script.js"></script>
 </body>
-
 </html>
