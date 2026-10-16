@@ -404,3 +404,38 @@
   s.onerror = () => { clearTimeout(timer); fail(); };
   document.body.appendChild(s);
 })();
+
+// ---- Boletines: archive list from boletines.js ----
+(function () {
+  const data = (window.RCARU_BOLETINES || []).filter((b) => b && b.fecha && b.enlace);
+  const box = document.getElementById("boletin-archivo");
+  const ul = document.getElementById("boletin-lista");
+  if (!box || !ul || !data.length) return;
+  const esc = (t) => String(t || "").replace(/[&<>"]/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const both = (o) => o ? `<span lang="es">${esc(o.es)}</span><span lang="en">${esc(o.en || o.es)}</span>` : "";
+  const d = (iso, lang) => new Intl.DateTimeFormat(lang, { month: "long", year: "numeric" })
+    .format(new Date(iso + "T12:00:00"));
+  ul.innerHTML = data.sort((a, b) => b.fecha.localeCompare(a.fecha)).map((b) => `
+    <li>
+      <a href="${esc(b.enlace)}" target="_blank" rel="noopener">
+        <span class="boletin-fecha"><span lang="es">${d(b.fecha, "es-AR")}</span><span lang="en">${d(b.fecha, "en-GB")}</span></span>
+        <span class="boletin-titulo">${both(b.titulo)}</span>
+        ${b.resumen ? `<span class="boletin-resumen">${both(b.resumen)}</span>` : ""}
+      </a>
+    </li>`).join("");
+  box.hidden = false;
+})();
+
+// ---- Visit counter: GoatCounter (no cookies, no personal data) ----
+// Create a free account at https://www.goatcounter.com and put its code here,
+// e.g. "rcaru" for https://rcaru.goatcounter.com. Empty = no counting.
+(function () {
+  const GOATCOUNTER_CODE = "";
+  if (!GOATCOUNTER_CODE || /^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return;
+  const s = document.createElement("script");
+  s.async = true;
+  s.src = "https://gc.zgo.at/count.js";
+  s.dataset.goatcounter = `https://${GOATCOUNTER_CODE}.goatcounter.com/count`;
+  document.body.appendChild(s);
+})();

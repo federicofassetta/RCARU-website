@@ -9,6 +9,8 @@ style.css         all styling; colours are variables at the top
 script.js         ES/EN switch, mobile menu, team-photo fallback, events
 eventos.js        list of events (edit this to add one)
 red.js            institutions for the map and numbers (no member counts)
+boletines.js      newsletter archive
+privacidad.html   privacy notice
 img/              logo variants, favicon, social-share card
 img/team/         coordinator photos (see below)
 RCARU_logo.png    original logo (source for the files in img/)
@@ -37,6 +39,23 @@ the visitor's choice.
 Copy one `<li class="person">…</li>` block in the `#equipo` section and change
 the LinkedIn link, initials, name and role. If someone has no LinkedIn, use the
 `<div class="person-static">` version (see Judith Cherni or Isro Gloger).
+
+### Newsletter archive
+
+Past newsletters are listed from `boletines.js`. Save the PDF in
+`docs/boletines/` (or use the newsletter's web link) and add an entry. Until
+there's at least one, the section only shows the subscribe button. Check each
+issue has no members' personal details before publishing it.
+
+### Privacy notice and visit counter
+
+`privacidad.html` is the privacy notice. Update it (and its date) if the form
+starts asking for something new or the data is used differently.
+
+Visits are counted with GoatCounter (no cookies, no personal data). It's off
+until you create a free account at goatcounter.com and put its code in
+`GOATCOUNTER_CODE` at the end of `script.js`. Visits from localhost aren't
+counted.
 
 ### Funding database (becas)
 

@@ -166,6 +166,27 @@
       </div>
     </section>
 
+    <!-- Newsletter (archive filled in by script.js from boletines.js) -->
+    <section class="section boletin" id="boletin">
+      <div class="wrap boletin-grid">
+        <div class="boletin-texto">
+          <h2><span lang="es">Boletín</span><span lang="en">Newsletter</span></h2>
+          <p>
+            <span lang="es">Novedades de la red, eventos, becas y convocatorias, directo en tu email. Lo reciben todos los miembros: para suscribirte, sumate a la red con el formulario.</span>
+            <span lang="en">Network news, events, fellowships and calls, straight to your inbox. All members receive it: to subscribe, join the network using the form.</span>
+          </p>
+          <a class="btn btn-navy" href="https://docs.google.com/forms/d/e/1FAIpQLScm18pNzECMZEFP5jRRceDAkdsjUvaOY8f1EcbW2y8bjrRIww/viewform?usp=dialog" target="_blank" rel="noopener">
+            <span lang="es">Suscribirme</span><span lang="en">Subscribe</span>
+          </a>
+          <p class="nota-privacidad"><a href="privacidad.html"><span lang="es">Cómo usamos tus datos</span><span lang="en">How we use your data</span></a></p>
+        </div>
+        <div class="boletin-archivo" id="boletin-archivo" hidden>
+          <h3><span lang="es">Boletines anteriores</span><span lang="en">Past issues</span></h3>
+          <ul id="boletin-lista"></ul>
+        </div>
+      </div>
+    </section>
+
     <!-- Newcomers guide -->
     <section class="section guia" id="llegada">
       <div class="wrap">
@@ -414,6 +435,7 @@
             <a class="btn btn-sun" href="https://docs.google.com/forms/d/e/1FAIpQLScm18pNzECMZEFP5jRRceDAkdsjUvaOY8f1EcbW2y8bjrRIww/viewform?usp=dialog" target="_blank" rel="noopener">
               <span lang="es">Completar el formulario</span><span lang="en">Fill in the form</span>
             </a>
+            <p class="nota-privacidad"><a href="privacidad.html"><span lang="es">Cómo usamos tus datos</span><span lang="en">How we use your data</span></a></p>
           </div>
           <div class="contact-item">
             <h3>LinkedIn</h3>
@@ -440,11 +462,12 @@
         <span lang="es">Red de Científicos Argentinos en el Reino Unido</span>
         <span lang="en">Network of Argentine Scientists in the United Kingdom</span>
       </p>
-      <p class="footer-small">© <span id="year">2026</span> RCARU</p>
+      <p class="footer-small"><a href="privacidad.html"><span lang="es">Privacidad</span><span lang="en">Privacy</span></a> <span aria-hidden="true">/</span> © <span id="year">2026</span> RCARU</p>
     </div>
   </footer>
 
   <script src="red.js"></script>
+  <script src="boletines.js"></script>
   <script src="eventos.js"></script>
   <script src="script.js"></script>
 </body>

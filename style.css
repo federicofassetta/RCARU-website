@@ -949,3 +949,70 @@ p { max-width: 62ch; }
   .nav-links { gap: 1.1rem; }
   .nav-links a { font-size: .95rem; }
 }
+
+/* ---------- Boletín ---------- */
+
+.boletin { border-top: 1px solid var(--line); }
+.boletin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+.boletin-texto p { color: var(--muted); margin-bottom: 1.5rem; }
+.boletin-texto .nota-privacidad { margin: .9rem 0 0; }
+
+.boletin-archivo h3 { color: var(--navy); margin-bottom: .5rem; }
+.boletin-archivo a {
+  display: grid;
+  gap: .1rem;
+  padding: .9rem 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+}
+.boletin-fecha { font-size: .88rem; color: var(--muted); }
+.boletin-fecha::first-letter { text-transform: uppercase; }
+.boletin-titulo { font: 600 1.25rem/1.2 var(--display); color: var(--ink); }
+.boletin-resumen { font-size: .95rem; color: var(--muted); }
+.boletin-archivo a:hover .boletin-titulo { color: var(--navy); text-decoration: underline; text-decoration-color: var(--celeste); text-underline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .boletin-grid { grid-template-columns: 1fr; }
+}
+
+.nota-privacidad { font-size: .9rem; margin-top: .9rem; }
+.nota-privacidad a { color: inherit; text-underline-offset: 3px; }
+.contact-main .nota-privacidad { color: #dce8f6; }
+
+.footer-small a { color: inherit; text-underline-offset: 3px; }
+
+/* ---------- Privacy page ---------- */
+
+.nav-links-simple { display: flex !important; position: static !important; flex-direction: row !important; align-items: center !important; padding: 0 !important; border: 0 !important; gap: 1.25rem !important; }
+.nav-links-simple li { width: auto !important; }
+.nav-links-simple .lang-switch { margin-top: 0 !important; }
+.nav-links-simple a { padding: .25rem 0 !important; font-size: 1rem !important; }
+
+.legal { padding-block: clamp(3rem, 7vw, 5rem); }
+.legal-wrap { max-width: 760px; }
+.legal h1 {
+  font-size: clamp(2.6rem, 6vw, 3.75rem);
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: .5rem;
+}
+.legal-fecha { color: var(--muted); font-size: .95rem; margin-bottom: 2rem; }
+.legal-intro {
+  font-size: 1.15rem;
+  padding: 1.25rem 1.4rem;
+  background: var(--celeste-soft);
+  border-radius: 6px 6px 6px 28px;
+  margin-bottom: 2.5rem;
+}
+.legal h2 {
+  font-size: 1.75rem;
+  margin: 2.25rem 0 .6rem;
+}
+.legal p { margin-bottom: 1rem; }
+.legal-lista { list-style: disc; padding-left: 1.3rem; margin-bottom: 1rem; }
+.legal-lista li { margin-bottom: .45rem; max-width: 62ch; }
