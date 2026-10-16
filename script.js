@@ -237,3 +237,170 @@
     if (entries.some((e) => e.isIntersecting)) { reveal(); obs.disconnect(); }
   }, { threshold: 0.25 }).observe(svg);
 })();
+
+// ---- Becas: read the network's Google Sheet live and show it as cards ----
+// The sheet stays the single source of truth: edit it and the site updates.
+// Personal contact emails in the sheet are never shown; we point to RCARU instead.
+(function () {
+  const SHEET_ID = "1djUr2eCCwPmGwWFn-BecRJmCKX9TzbRU";
+  const CONTACT = "mailto:redcaenru@gmail.com";
+  const estado = document.getElementById("becas-estado");
+  if (!estado) return;
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (t) => String(t || "").replace(/[&<>"]/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const clean = (t) => String(t == null ? "" : t).trim();
+  const vague = (t) => !t || /^(depende|ver bases|varía|varia)/i.test(t);
+  const firstUrl = (t) => (String(t || "").match(/https?:\/\/[^\s,;]+/) || [""])[0];
+  const host = (u) => { try { return new URL(u).hostname.replace(/^www\d?\./, ""); } catch (e) { return ""; } };
+  const both = (es, en) => `<span lang="es">${es}</span><span lang="en">${en}</span>`;
+
+  // Which level filters a row belongs to
+  function levels(nivel) {
+    const s = clean(nivel).toLowerCase();
+    if (/todos/.test(s)) return ["doc", "post"];
+    const out = [];
+    if (/postdoc/.test(s)) out.push("post");
+    if (/doctor|postgrado|phd|maestr|master/.test(s.replace(/postdoc\w*/g, ""))) out.push("doc");
+    return out.length ? out : ["doc", "post"];
+  }
+
+  function fail() {
+    estado.innerHTML = both(
+      `No pudimos cargar la base en este momento. <a class="text-link" href="${$("becas-planilla").href}" target="_blank" rel="noopener">Abrila en Google Sheets</a>.`,
+      `We couldn't load the database right now. <a class="text-link" href="${$("becas-planilla").href}" target="_blank" rel="noopener">Open it in Google Sheets</a>.`);
+  }
+
+  function build(table) {
+    let rows = table.rows.map((r) => (r.c || []).map((c) => clean(c && (c.v != null ? c.v : c.f))));
+    let head = table.cols.map((c) => clean(c.label));
+    if (!head.some(Boolean)) head = rows.shift();          // header is the first row
+    const col = (re) => head.findIndex((h) => re.test(h));
+    const C = {
+      nivel: col(/nivel/i), disc: col(/disciplina/i), tipo: col(/tipo de oportunidad/i),
+      fin: col(/financ/i), apertura: col(/apertura/i), comienzo: col(/comienzo/i),
+      duracion: col(/duraci/i), inst: col(/instituci/i), nombre: col(/nombre de la beca/i),
+      desc: col(/descripci/i), url: col(/aplicar|url/i), contacto: col(/contacto/i), notas: col(/aclaraciones/i)
+    };
+    const get = (r, k) => (C[k] >= 0 ? r[C[k]] || "" : "");
+
+    const items = rows.filter((r) => get(r, "inst") || get(r, "nombre")).map((r) => {
+      const url = firstUrl(get(r, "url"));
+      const desc = /^https?:\/\//.test(get(r, "desc")) ? "" : get(r, "desc");
+      let inst = get(r, "inst");
+      if (/^(incluye|ver bases)/i.test(inst)) inst = host(url) || inst;
+      return {
+        nombre: get(r, "nombre"), inst, desc, url,
+        nivelTxt: get(r, "nivel"), niveles: levels(get(r, "nivel")),
+        disc: get(r, "disc"), fin: get(r, "fin"),
+        apertura: get(r, "apertura"), comienzo: get(r, "comienzo"), duracion: get(r, "duracion"),
+        notas: get(r, "notas"), conContacto: !!get(r, "contacto"),
+        buscador: !get(r, "nombre")
+      };
+    });
+    items.forEach((it) => {
+      it.texto = [it.nombre, it.inst, it.desc, it.disc, it.nivelTxt, it.notas].join(" ")
+        .toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    });
+    return items;
+  }
+
+  function finBadge(fin) {
+    if (/totalmente/i.test(fin)) return `<span class="badge badge-total">${both("Totalmente financiada", "Fully funded")}</span>`;
+    if (/parcial/i.test(fin)) return `<span class="badge badge-parcial">${both("Financiamiento parcial", "Partly funded")}</span>`;
+    return "";
+  }
+
+  function card(it) {
+    const meta = [
+      ["Nivel", "Level", it.nivelTxt],
+      ["Convocatoria", "Applications", it.apertura],
+      ["Comienzo", "Starts", it.comienzo],
+      ["Duración", "Length", it.duracion]
+    ].filter((m) => !vague(m[2]))
+     .map((m) => `<div><dt>${both(m[0], m[1])}</dt><dd>${esc(m[2])}</dd></div>`).join("");
+    return `
+      <li class="beca">
+        <p class="beca-inst">${esc(it.inst)}</p>
+        <h4>${esc(it.nombre)}</h4>
+        ${finBadge(it.fin)}
+        ${meta ? `<dl class="beca-meta">${meta}</dl>` : ""}
+        ${it.desc ? `<p class="beca-desc">${esc(it.desc)}</p>
+          <button type="button" class="beca-mas" aria-expanded="false">${both("Leer más", "Read more")}</button>` : ""}
+        ${it.notas ? `<p class="beca-notas">${esc(it.notas)}</p>` : ""}
+        <div class="beca-links">
+          ${it.url ? `<a class="text-link" href="${esc(it.url)}" target="_blank" rel="noopener">${both("Ir a la convocatoria", "Go to the call")}</a>` : ""}
+          ${it.conContacto ? `<a class="beca-contacto" href="${CONTACT}">${both("Hay miembros de la red que la conocen: escribinos", "Network members know this one: get in touch")}</a>` : ""}
+        </div>
+      </li>`;
+  }
+
+  function buscador(it) {
+    return `
+      <li>
+        <a href="${esc(it.url)}" target="_blank" rel="noopener">
+          <span class="buscador-nombre">${esc(it.inst)}</span>
+          <span class="buscador-desc">${esc(it.desc)}</span>
+        </a>
+      </li>`;
+  }
+
+  let all = [], nivel = "todos", q = "";
+
+  function render() {
+    const norm = q.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+    const shown = all.filter((it) =>
+      (nivel === "todos" || it.niveles.includes(nivel)) && (!norm || it.texto.includes(norm)));
+    const prog = shown.filter((it) => !it.buscador);
+    const busc = shown.filter((it) => it.buscador && it.url);
+    $("becas-programas").innerHTML = prog.map(card).join("");
+    $("becas-buscadores").innerHTML = busc.map(buscador).join("");
+    $("becas-programas-wrap").hidden = !prog.length;
+    $("becas-buscadores-wrap").hidden = !busc.length;
+    $("becas-vacio").hidden = !!shown.length;
+
+    // Only offer "Read more" where the description is actually cut off
+    document.querySelectorAll(".beca-desc").forEach((p) => {
+      const btn = p.nextElementSibling;
+      if (btn && btn.classList.contains("beca-mas")) btn.hidden = p.scrollHeight <= p.clientHeight + 2;
+    });
+  }
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".beca-mas");
+    if (!btn) return;
+    const open = btn.getAttribute("aria-expanded") !== "true";
+    btn.setAttribute("aria-expanded", String(open));
+    btn.previousElementSibling.classList.toggle("abierta", open);
+    btn.innerHTML = open ? both("Leer menos", "Read less") : both("Leer más", "Read more");
+  });
+
+  document.querySelectorAll("[data-nivel]").forEach((b) => b.addEventListener("click", () => {
+    nivel = b.dataset.nivel;
+    document.querySelectorAll("[data-nivel]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    render();
+  }));
+  $("becas-q").addEventListener("input", (e) => { q = e.target.value; render(); });
+
+  // Load via Google's visualization endpoint (works from any site, no API key)
+  window.google = window.google || {};
+  google.visualization = google.visualization || {};
+  google.visualization.Query = google.visualization.Query || {};
+  const timer = setTimeout(fail, 12000);
+  google.visualization.Query.setResponse = (resp) => {
+    clearTimeout(timer);
+    try {
+      if (resp.status !== "ok") throw new Error(resp.status);
+      all = build(resp.table);
+      if (!all.length) throw new Error("empty");
+      estado.hidden = true;
+      $("becas-filtros").hidden = false;
+      render();
+    } catch (err) { fail(); }
+  };
+  const s = document.createElement("script");
+  s.src = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+  s.onerror = () => { clearTimeout(timer); fail(); };
+  document.body.appendChild(s);
+})();

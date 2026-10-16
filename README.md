@@ -38,6 +38,21 @@ Copy one `<li class="person">…</li>` block in the `#equipo` section and change
 the LinkedIn link, initials, name and role. If someone has no LinkedIn, use the
 `<div class="person-static">` version (see Judith Cherni or Isro Gloger).
 
+### Funding database (becas)
+
+The becas section reads the network's Google spreadsheet **live** every time the
+page loads, so to add, change or remove an opportunity just edit the sheet;
+no code changes needed. Keep the column headers as they are (the site finds
+columns by their names). Rows with an empty "Nombre de la Beca" are shown as job
+or funding boards; the rest as cards. Contact emails in the sheet are never
+shown on the site: cards with a contact say "escribinos" and link to the RCARU
+email instead. If the sheet can't be reached, visitors get a link to open it.
+
+### Newcomers guide
+
+The "Recién llegados" links are plain HTML in `index.html` (section
+`#llegada`). Check them once or twice a year: official pages move.
+
 ### Network map and numbers
 
 `red.js` holds the list of institutions (name, city, latitude, longitude).
