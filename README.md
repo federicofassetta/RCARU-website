@@ -8,6 +8,7 @@ index.html        page content (Spanish + English, side by side)
 style.css         all styling; colours are variables at the top
 script.js         ES/EN switch, mobile menu, team-photo fallback, events
 eventos.js        list of events (edit this to add one)
+red.js            institutions for the map and numbers (no member counts)
 img/              logo variants, favicon, social-share card
 img/team/         coordinator photos (see below)
 RCARU_logo.png    original logo (source for the files in img/)
@@ -36,6 +37,17 @@ the visitor's choice.
 Copy one `<li class="person">…</li>` block in the `#equipo` section and change
 the LinkedIn link, initials, name and role. If someone has no LinkedIn, use the
 `<div class="person-static">` version (see Judith Cherni or Isro Gloger).
+
+### Network map and numbers
+
+`red.js` holds the list of institutions (name, city, latitude, longitude).
+The map and the two numbers (institutions, cities) are calculated from it.
+By design the site does **not** show how many members are at each place, so it
+can't be used to identify individuals: please don't add member counts.
+
+It currently contains **sample data**, and the page says so while
+`ejemplo: true`. To publish the real list: replace it and set `ejemplo: false`.
+Coordinates come from Google Maps (right-click a place and copy the two numbers).
 
 ### Events
 

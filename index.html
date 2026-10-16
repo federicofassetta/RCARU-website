@@ -35,6 +35,7 @@
 
       <ul class="nav-links" id="nav-links">
         <li><a href="#mision"><span lang="es">Misión</span><span lang="en">Mission</span></a></li>
+        <li><a href="#red"><span lang="es">La red</span><span lang="en">Network</span></a></li>
         <li><a href="#eventos"><span lang="es">Eventos</span><span lang="en">Events</span></a></li>
         <li><a href="#becas"><span lang="es">Becas</span><span lang="en">Funding</span></a></li>
         <li><a href="#equipo"><span lang="es">Equipo</span><span lang="en">Team</span></a></li>
@@ -104,6 +105,45 @@
             <p><span lang="es">Difundimos becas, programas de cooperación, puestos de trabajo y posiciones de posgrado.</span><span lang="en">We share fellowships, cooperation programmes, jobs and postgraduate positions.</span></p>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- Network map + numbers (filled in by script.js from red.js) -->
+    <section class="section red" id="red">
+      <div class="wrap red-grid">
+        <div class="red-texto">
+          <h2><span lang="es">Dónde estamos</span><span lang="en">Where we are</span></h2>
+          <p>
+            <span lang="es">Nuestros miembros investigan y trabajan en universidades, institutos y empresas de todo el Reino Unido.</span>
+            <span lang="en">Our members do research and work at universities, institutes and companies across the UK.</span>
+          </p>
+
+          <dl class="red-numeros">
+            <div><dt><span lang="es">instituciones</span><span lang="en">institutions</span></dt><dd id="n-instituciones">–</dd></div>
+            <div><dt><span lang="es">ciudades</span><span lang="en">cities</span></dt><dd id="n-ciudades">–</dd></div>
+          </dl>
+
+          <p class="red-ejemplo" id="red-ejemplo" hidden>
+            <span lang="es">Datos de ejemplo: los números reales se publicarán pronto.</span>
+            <span lang="en">Sample data: real figures coming soon.</span>
+          </p>
+        </div>
+
+        <figure class="red-mapa">
+          <svg id="red-svg" viewBox="0 0 755 1130" role="img" aria-labelledby="red-svg-title">
+            <title id="red-svg-title">Mapa del Reino Unido con las instituciones de la red</title>
+            <image href="img/mapa-uk.svg" x="0" y="0" width="755" height="1130"/>
+            <g id="red-enlaces"></g>
+            <g id="red-nodos"></g>
+          </svg>
+          <div class="red-tooltip" id="red-tooltip" hidden></div>
+          <figcaption>
+            <span lang="es">Cada punto es una institución donde trabajan miembros de la red.</span>
+            <span lang="en">Each dot is an institution where network members work.</span>
+          </figcaption>
+        </figure>
+
+        <ul class="sr-only" id="red-lista"></ul>
       </div>
     </section>
 
@@ -271,6 +311,7 @@
     </div>
   </footer>
 
+  <script src="red.js"></script>
   <script src="eventos.js"></script>
   <script src="script.js"></script>
 </body>

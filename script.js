@@ -123,3 +123,117 @@
     archive.hidden = false;
   }
 })();
+
+// ---- La red: numbers + UK map in the logo's node-and-link style (data in red.js) ----
+(function () {
+  const data = window.RCARU_RED;
+  const svg = document.getElementById("red-svg");
+  if (!data || !svg) return;
+
+  const list = (data.instituciones || []).filter((i) => isFinite(i.lat) && isFinite(i.lon));
+  const NS = "http://www.w3.org/2000/svg";
+
+  // Numbers
+  const cities = new Set(list.map((i) => (i.ciudad || "").trim().toLowerCase()).filter(Boolean));
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set("n-instituciones", list.length);
+  set("n-ciudades", cities.size);
+  const ex = document.getElementById("red-ejemplo");
+  if (ex) ex.hidden = !data.ejemplo;
+
+  // Same projection as img/mapa-uk.svg
+  const C = Math.cos(54.5 * Math.PI / 180);
+  const project = (lat, lon) => [(lon + 10.8) * C * 100, (61 - lat) * 100];
+  const R = 11;   // every institution drawn the same size: no member counts
+
+  const nodes = list.map((i) => {
+    const [x, y] = project(i.lat, i.lon);
+    return { nombre: i.nombre, ciudad: i.ciudad, x, y, r: R };
+  });
+
+  // Nudge overlapping nodes apart (e.g. several London institutions)
+  for (let k = 0; k < 80; k++) {
+    for (let a = 0; a < nodes.length; a++) for (let b = a + 1; b < nodes.length; b++) {
+      const A = nodes[a], B = nodes[b];
+      let dx = B.x - A.x, dy = B.y - A.y, d = Math.hypot(dx, dy) || 0.01;
+      const min = A.r + B.r + 4;
+      if (d < min) {
+        if (d < 0.02) { dx = Math.cos(a + b); dy = Math.sin(a + b); d = 1; }
+        const push = (min - d) / 2;
+        A.x -= dx / d * push; A.y -= dy / d * push;
+        B.x += dx / d * push; B.y += dy / d * push;
+      }
+    }
+  }
+
+  // Links: a minimum spanning tree, so every node hangs off the network like in the logo
+  const links = [];
+  if (nodes.length > 1) {
+    const inTree = new Set([0]);
+    while (inTree.size < nodes.length) {
+      let best = null;
+      inTree.forEach((a) => nodes.forEach((B, b) => {
+        if (inTree.has(b)) return;
+        const d = Math.hypot(B.x - nodes[a].x, B.y - nodes[a].y);
+        if (!best || d < best.d) best = { a, b, d };
+      }));
+      links.push(best); inTree.add(best.b);
+    }
+  }
+
+  const gLinks = document.getElementById("red-enlaces");
+  const gNodes = document.getElementById("red-nodos");
+  links.forEach((l, i) => {
+    const line = document.createElementNS(NS, "line");
+    line.setAttribute("x1", nodes[l.a].x); line.setAttribute("y1", nodes[l.a].y);
+    line.setAttribute("x2", nodes[l.b].x); line.setAttribute("y2", nodes[l.b].y);
+    line.style.setProperty("--i", i);
+    gLinks.appendChild(line);
+  });
+
+  const tip = document.getElementById("red-tooltip");
+  const fig = svg.closest("figure");
+  const showTip = (n, el) => {
+    tip.innerHTML = `<strong>${n.nombre}</strong><span>${n.ciudad}</span>`;
+    tip.hidden = false;
+    const box = el.getBoundingClientRect(), f = fig.getBoundingClientRect();
+    tip.style.left = (box.left + box.width / 2 - f.left) + "px";
+    tip.style.top = (box.top - f.top) + "px";
+  };
+  const hideTip = () => { tip.hidden = true; };
+
+  // Draw south to north so the reveal sweeps up the map
+  const order = nodes.map((n, i) => i).sort((a, b) => nodes[b].y - nodes[a].y);
+  order.forEach((idx, k) => {
+    const n = nodes[idx];
+    const g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "nodo");
+    g.setAttribute("tabindex", "0");
+    g.setAttribute("aria-label", `${n.nombre}, ${n.ciudad}`);
+    g.style.setProperty("--i", k);
+    g.style.transformOrigin = `${n.x}px ${n.y}px`;
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("cx", n.x); c.setAttribute("cy", n.y); c.setAttribute("r", n.r);
+    const hit = document.createElementNS(NS, "circle");   // larger touch target
+    hit.setAttribute("cx", n.x); hit.setAttribute("cy", n.y); hit.setAttribute("r", Math.max(n.r, 16));
+    hit.setAttribute("class", "hit");
+    g.append(hit, c);
+    g.addEventListener("mouseenter", () => showTip(n, c));
+    g.addEventListener("focus", () => showTip(n, c));
+    g.addEventListener("click", () => showTip(n, c));
+    g.addEventListener("mouseleave", hideTip);
+    g.addEventListener("blur", hideTip);
+    gNodes.appendChild(g);
+  });
+
+  // Screen-reader list
+  const ul = document.getElementById("red-lista");
+  if (ul) ul.innerHTML = list.map((n) => `<li>${n.nombre}, ${n.ciudad}</li>`).join("");
+
+  // One reveal when the map scrolls into view
+  const reveal = () => svg.classList.add("visible");
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) reveal();
+  else new IntersectionObserver((entries, obs) => {
+    if (entries.some((e) => e.isIntersecting)) { reveal(); obs.disconnect(); }
+  }, { threshold: 0.25 }).observe(svg);
+})();
