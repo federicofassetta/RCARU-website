@@ -6,7 +6,8 @@ Plain HTML, CSS and a little JavaScript: no build step, no framework.
 ```
 index.html        page content (Spanish + English, side by side)
 style.css         all styling; colours are variables at the top
-script.js         ES/EN switch, mobile menu, team-photo fallback
+script.js         ES/EN switch, mobile menu, team-photo fallback, events
+eventos.js        list of events (edit this to add one)
 img/              logo variants, favicon, social-share card
 img/team/         coordinator photos (see below)
 RCARU_logo.png    original logo (source for the files in img/)
@@ -35,6 +36,16 @@ the visitor's choice.
 Copy one `<li class="person">…</li>` block in the `#equipo` section and change
 the LinkedIn link, initials, name and role. If someone has no LinkedIn, use the
 `<div class="person-static">` version (see Judith Cherni or Isro Gloger).
+
+### Events
+
+Events live in `eventos.js`, not in `index.html`. To add one, copy a `{ ... }`
+block, change the date, title, place and summary, and save.
+
+- An event dated today or later shows as **Próximo encuentro** (the soonest one).
+- Once its date has passed it moves to **Encuentros anteriores** by itself.
+- Optional: put a photo in `img/eventos/` and set `foto`, and a programme PDF
+  (e.g. in `docs/`) and set `programa`.
 
 ### Team photos
 

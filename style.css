@@ -462,3 +462,129 @@ p { max-width: 62ch; }
   .hero-mark { animation: none; }
   * { transition: none !important; }
 }
+
+/* ---------- Eventos ---------- */
+
+.eventos { border-top: 1px solid var(--line); }
+.eventos h2 { margin-bottom: 2rem; }
+
+.proximo {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 6px 6px 6px 40px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+/* The date is the visual anchor of the card */
+.proximo-fecha {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background: var(--navy);
+  color: #fff;
+  overflow: hidden;
+}
+.proximo-fecha::before {
+  content: "";
+  position: absolute;
+  inset: -20% -45% -20% auto;
+  width: 90%;
+  background: url("img/mark-white.png") center / contain no-repeat;
+  opacity: .12;
+}
+.proximo-fecha img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: .35;
+}
+.proximo-dia {
+  position: relative;
+  font: 700 clamp(5.5rem, 12vw, 8.5rem)/.85 var(--display);
+}
+.proximo-mes {
+  position: relative;
+  font: 600 2rem/1 var(--display);
+  color: var(--sun);
+  margin-top: .35rem;
+}
+
+.proximo-info { padding: clamp(1.5rem, 4vw, 2.75rem); }
+.proximo-info > p { color: var(--muted); margin-bottom: 1rem; }
+.proximo-kicker {
+  font-weight: 600;
+  color: var(--navy) !important;
+  margin-bottom: .35rem !important;
+}
+.proximo-info h3 {
+  font-size: clamp(1.9rem, 3.6vw, 2.6rem);
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+
+.proximo-datos {
+  display: grid;
+  gap: .5rem;
+  margin-bottom: 1.25rem;
+}
+.proximo-datos div { display: flex; gap: 1rem; }
+.proximo-datos dt {
+  flex: 0 0 4.5rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+.proximo-datos dd::first-letter { text-transform: uppercase; }
+
+.proximo-nota {
+  font-size: .98rem;
+  padding-left: .85rem;
+  border-left: 3px solid var(--sun);
+}
+.proximo-acciones {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.sin-eventos {
+  color: var(--muted);
+  padding: 1.5rem;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+}
+
+@media (max-width: 680px) {
+  .proximo { grid-template-columns: 1fr; border-radius: 6px 6px 6px 28px; }
+  .proximo-fecha { flex-direction: row; gap: .75rem; padding: 1.25rem; justify-content: flex-start; }
+  .proximo-dia { font-size: 4.5rem; }
+  .proximo-mes { margin-top: 0; }
+}
+
+/* Archive */
+.archivo { margin-top: 3.5rem; }
+.archivo-title { color: var(--navy); margin-bottom: 1.5rem; }
+.archivo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem 1.5rem;
+}
+.pasado-foto {
+  aspect-ratio: 4 / 3;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: .9rem;
+  background: var(--celeste-soft) url("img/mark-navy.png") center / 30% no-repeat;
+}
+.pasado-foto img { width: 100%; height: 100%; object-fit: cover; }
+.pasado-fecha { font-size: .92rem; color: var(--muted); }
+.pasado-fecha::first-letter { text-transform: uppercase; }
+.pasado h4 { font: 600 1.35rem/1.15 var(--display); margin: .15rem 0 .2rem; }
+.pasado-lugar { font-size: .95rem; color: var(--navy); margin-bottom: .35rem; }
+.pasado p:last-child { color: var(--muted); font-size: .98rem; }

@@ -35,6 +35,7 @@
 
       <ul class="nav-links" id="nav-links">
         <li><a href="#mision"><span lang="es">Misión</span><span lang="en">Mission</span></a></li>
+        <li><a href="#eventos"><span lang="es">Eventos</span><span lang="en">Events</span></a></li>
         <li><a href="#becas"><span lang="es">Becas</span><span lang="en">Funding</span></a></li>
         <li><a href="#equipo"><span lang="es">Equipo</span><span lang="en">Team</span></a></li>
         <li><a href="#contacto"><span lang="es">Contacto</span><span lang="en">Contact</span></a></li>
@@ -103,6 +104,24 @@
             <p><span lang="es">Difundimos becas, programas de cooperación, puestos de trabajo y posiciones de posgrado.</span><span lang="en">We share fellowships, cooperation programmes, jobs and postgraduate positions.</span></p>
           </li>
         </ul>
+      </div>
+    </section>
+
+    <!-- Events (filled in by script.js from eventos.js) -->
+    <section class="section eventos" id="eventos">
+      <div class="wrap">
+        <h2><span lang="es">Eventos</span><span lang="en">Events</span></h2>
+
+        <div id="evento-proximo"></div>
+
+        <div class="archivo" id="archivo" hidden>
+          <h3 class="archivo-title"><span lang="es">Encuentros anteriores</span><span lang="en">Past events</span></h3>
+          <ul class="archivo-grid" id="archivo-grid"></ul>
+        </div>
+
+        <noscript>
+          <p><a class="text-link" href="https://luma.com/user/rcaru">Ver los eventos de RCARU en Luma</a></p>
+        </noscript>
       </div>
     </section>
 
@@ -252,6 +271,7 @@
     </div>
   </footer>
 
+  <script src="eventos.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
